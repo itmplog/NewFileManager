@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUIREPERMISSION_RTN);
         } else {
-            listPath(currentPath, listView);
+            listPath();
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case REQUIREPERMISSION_RTN:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    listPath(currentPath, listView);
+                    listPath();
                 } else {
                     Toast.makeText(getApplicationContext(), "Need Permission to read SDCard.", Toast.LENGTH_SHORT).show();
                     finish();
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void listPath(TextView currentPath, ListView listView){
+    public void listPath(){
         if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             Toast.makeText(getApplicationContext(), "Sdcard not mounted.", Toast.LENGTH_SHORT).show();
             return;
